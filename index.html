@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wordly document dictionary</title>
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: "Trebuchet MS", sans-serif;
+            color: #202c2b;
+            background: #f4f7f3;
+            font-synthesis: none;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f4f7f3 0%, #edf3ee 58%, #fbf3eb 100%);
+        }
+
+        main {
+            width: min(100% - 32px, 760px);
+            margin: 0 auto;
+            padding: 52px 0 64px;
+        }
+
+        h1, h2, p {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-bottom: 28px;
+            color: #1d5b50;
+            font-family: Georgia, serif;
+            font-size: 40px;
+            font-weight: 500;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #d5dfd9;
+        }
+
+        input {
+            min-width: 0;
+            flex: 1;
+            padding: 13px 15px;
+            border: 1px solid #bdcbc4;
+            border-radius: 5px;
+            background: #fff;
+            color: inherit;
+            font: inherit;
+        }
+
+        button {
+            min-height: 44px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 5px;
+            background: #1d5b50;
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-weight: 700;
+        }
+
+        button:hover {
+            background: #17473f;
+        }
+
+        button:focus-visible, input:focus-visible {
+            outline: 3px solid #e6a650;
+            outline-offset: 2px;
+        }
+
+        #results {
+            min-height: 80px;
+            padding: 24px 0;
+        }
+
+        .result-panel {
+            padding: 20px 22px;
+            border-left: 4px solid #8da99c;
+            background: #fff;
+            transition: background-color 180ms ease, border-color 180ms ease;
+        }
+
+        .result-panel.is-favorite {
+            border-color: #d78a3b;
+            background: #fff8ed;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .result-header h2, #favorites-heading {
+            margin-bottom: 4px;
+            font-family: Georgia, serif;
+            font-weight: 500;
+        }
+
+        .phonetic {
+            color: #687975;
+        }
+
+        .meaning {
+            margin: 14px 0 0;
+            line-height: 1.55;
+        }
+
+        .favorite-toggle {
+            flex: 0 0 auto;
+            border: 1px solid #c9782c;
+            background: transparent;
+            color: #8c4d16;
+        }
+
+        .favorite-toggle:hover {
+            background: #f8ead8;
+        }
+
+        #favorites-section {
+            padding-top: 20px;
+            border-top: 1px solid #d5dfd9;
+        }
+
+        #favorites-heading {
+            color: #1d5b50;
+            font-size: 24px;
+        }
+
+        #favorites-list {
+            display: grid;
+            gap: 8px;
+            margin: 16px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .favorite-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e7e2;
+        }
+
+        .favorite-word {
+            color: #1d5b50;
+            font-weight: 700;
+        }
+
+        .remove-favorite {
+            min-height: 34px;
+            padding: 0 12px;
+            background: transparent;
+            color: #8c4d16;
+        }
+
+        .remove-favorite:hover {
+            background: #f8ead8;
+        }
+
+        .empty-favorites, .status-message {
+            color: #687975;
+        }
+
+        @media (max-width: 480px) {
+            main {
+                padding-top: 32px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .result-header {
+                flex-direction: column;
+            }
+
+            .favorite-toggle {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Wordly</h1>
+        <form id="search-form">
+            <input type="text" id="word-input" placeholder="enter a word">
+            <button type="submit">Search</button>
+        </form>
+        <div id="results" aria-live="polite"></div>
+        <section id="favorites-section" aria-labelledby="favorites-heading">
+            <h2 id="favorites-heading">Saved favorites</h2>
+            <ul id="favorites-list"></ul>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
